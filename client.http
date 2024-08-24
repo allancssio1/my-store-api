@@ -1,0 +1,8 @@
+@baseUrl = http://localhost:3333 
+# @authToken = {{authenticate.response.body.access_token}}
+
+
+# @name get_users
+GET  {{baseUrl}}/user
+Content-Type:  application/json
+# Authorization: Bearer {{authToken}}
