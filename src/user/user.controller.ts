@@ -6,10 +6,20 @@ import {
   Patch,
   Param,
   Delete,
-} from '@nestjs/common';
-import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+  Query,
+} from '@nestjs/common'
+import { UserService } from './user.service'
+import { CreateUserDto } from './dto/create-user.dto'
+import { UpdateUserDto } from './dto/update-user.dto'
+import { z } from 'zod'
+
+const pageParamsSquema = z
+  .string()
+  .optional()
+  .default('i')
+  .transform(Number)
+  .pipe(z.number().min(1))
+type PageQuerySchema = z.infer<typeof pageParamsSquema>
 
 @Controller('user')
 export class UserController {
@@ -17,26 +27,26 @@ export class UserController {
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+    return this.userService.create(createUserDto)
   }
 
   @Get()
-  findAll() {
-    return this.userService.findAll();
+  findAll(@Query('page', pageParamsSquema) page: PageQuerySchema) {
+    return this.userService.findAll(page)
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+    return this.userService.findOne(id)
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+    return this.userService.update(id, updateUserDto)
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+    return this.userService.remove(id)
   }
 }
