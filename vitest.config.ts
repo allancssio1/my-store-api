@@ -4,7 +4,7 @@ import tsConfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
   test: {
-    exclude: [...configDefaults.exclude, '**/data/pg/**'],
+    exclude: [...configDefaults.exclude, '**/data/pg/**', '**/dist/*'],
     globals: true,
     root: './',
   },

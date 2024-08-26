@@ -6,36 +6,43 @@ import { PrismaService } from 'src/database/prisma/prisma.service'
 @Injectable()
 export class UserService {
   constructor(private readonly prisma: PrismaService) {}
-  create(createUserDto: CreateUserDto) {
-    return this.prisma.user.create({ data: createUserDto })
+  async create(createUserDto: CreateUserDto) {
+    const user = await this.prisma.user.create({ data: createUserDto })
+    return user ?? null
   }
 
-  findAll(page: number) {
-    return this.prisma.user.findMany({
+  async findAll(page: string) {
+    const pageDefault = page ? Number(page) : 1
+
+    const user = await this.prisma.user.findMany({
       orderBy: {
         createdAt: 'desc',
       },
       take: 20,
-      skip: (page - 1) * 20,
+      skip: (pageDefault - 1) * 20,
     })
+
+    return user ?? null
   }
 
   findOne(id: string) {
-    return this.prisma.user.findUniqueOrThrow({
+    const user = this.prisma.user.findUnique({
       where: {
         id,
       },
     })
+    return user ?? null
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return this.prisma.user.update({
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    const user = await this.prisma.user.update({
       where: { id },
       data: updateUserDto,
     })
+    return user ?? null
   }
 
-  remove(id: string) {
-    return this.prisma.user.delete({ where: { id } })
+  async remove(id: string) {
+    await this.prisma.user.delete({ where: { id } })
   }
 }

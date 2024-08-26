@@ -3,23 +3,14 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Query,
+  Put,
 } from '@nestjs/common'
 import { UserService } from './user.service'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
-import { z } from 'zod'
-
-const pageParamsSquema = z
-  .string()
-  .optional()
-  .default('i')
-  .transform(Number)
-  .pipe(z.number().min(1))
-type PageQuerySchema = z.infer<typeof pageParamsSquema>
 
 @Controller('user')
 export class UserController {
@@ -31,7 +22,7 @@ export class UserController {
   }
 
   @Get()
-  findAll(@Query('page', pageParamsSquema) page: PageQuerySchema) {
+  findAll(@Query('page') page: string) {
     return this.userService.findAll(page)
   }
 
@@ -40,7 +31,7 @@ export class UserController {
     return this.userService.findOne(id)
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(id, updateUserDto)
   }

@@ -1,8 +1,42 @@
-@baseUrl = http://localhost:3333 
-# @authToken = {{authenticate.response.body.access_token}}
-
+@baseUrl = http://localhost:3333
 
 # @name get_users
 GET  {{baseUrl}}/user
 Content-Type:  application/json
-# Authorization: Bearer {{authToken}}
+
+###
+# @name get_user
+GET  {{baseUrl}}/user/5caa0f24-604c-4418-8bd5-58af3a4ba8ef
+Content-Type:  application/json
+
+###
+# @name create_user
+POST {{baseUrl}}/user
+Content-Type:  application/json
+{
+  "name": "allan",
+  "email": "email@email.com"
+}
+
+###
+
+# @name update_user
+PUT {{baseUrl}}/user/5caa0f24-604c-4418-8bd5-58af3a4ba8ef
+Content-Type:  application/json
+
+{
+  "name": "allan",
+  "email": "email2@email.com"
+}
+
+###
+
+# @name delete_user
+DELETE {{baseUrl}}/user/5caa0f24-604c-4418-8bd5-58af3a4ba8ef
+Content-Type:  application/json
+
+{
+  "name": "allan",
+  "email": "email2@email.com"
+}
+
