@@ -1,0 +1,39 @@
+@baseUrl = http://localhost:3333
+
+###
+
+# @name get_products
+GET  {{baseUrl}}/product
+Content-Type:  application/json
+
+###
+# @name get_product
+GET  {{baseUrl}}/product/5caa0f24-604c-4418-8bd5-58af3a4ba8ef
+Content-Type:  application/json
+
+###
+# @name create_product
+POST {{baseUrl}}/product
+Content-Type:  application/json
+
+{
+  "title": "product",
+  "slug": "product-1",
+  "description": "product created",
+  "storeId": "32c4de19-6a89-49e6-8d09-b4f4712891ff"
+}
+
+###
+
+# @name update_product
+PATCH {{baseUrl}}/product/88aac8fd-f30a-4b01-8a78-59291c6dd8fc
+Content-Type:  application/json
+
+{
+  "title": "product A"
+}
+
+###
+
+# @name delete_product
+DELETE {{baseUrl}}/product/88aac8fd-f30a-4b01-8a78-59291c6dd8fc

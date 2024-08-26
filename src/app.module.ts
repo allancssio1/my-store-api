@@ -3,6 +3,9 @@ import { UserModule } from './user/user.module'
 import { ConfigModule } from '@nestjs/config'
 import { envShcema } from './env/env'
 import { EnvModule } from './env/env.module'
+import { StoreModule } from './store/store.module'
+import { ProductModule } from './product/product.module'
+import { DatabaseModule } from './database/database.module'
 
 @Module({
   imports: [
@@ -12,8 +15,11 @@ import { EnvModule } from './env/env.module'
     }),
     UserModule,
     EnvModule,
+    StoreModule,
+    ProductModule,
+    DatabaseModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [DatabaseModule],
 })
 export class AppModule {}

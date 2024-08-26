@@ -13,6 +13,7 @@ Content-Type:  application/json
 # @name create_user
 POST {{baseUrl}}/user
 Content-Type:  application/json
+
 {
   "name": "allan",
   "email": "email@email.com"
@@ -21,7 +22,7 @@ Content-Type:  application/json
 ###
 
 # @name update_user
-PUT {{baseUrl}}/user/5caa0f24-604c-4418-8bd5-58af3a4ba8ef
+PATCH {{baseUrl}}/user/5caa0f24-604c-4418-8bd5-58af3a4ba8ef
 Content-Type:  application/json
 
 {
@@ -32,11 +33,5 @@ Content-Type:  application/json
 ###
 
 # @name delete_user
-DELETE {{baseUrl}}/user/5caa0f24-604c-4418-8bd5-58af3a4ba8ef
-Content-Type:  application/json
-
-{
-  "name": "allan",
-  "email": "email2@email.com"
-}
+DELETE {{baseUrl}}/user/b9c235f5-daf9-4637-9360-292d76833112
 
